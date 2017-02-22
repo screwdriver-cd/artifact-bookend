@@ -17,7 +17,7 @@ class ArtifactBookend extends BookendInterface {
             'cd $SD_ARTIFACTS_DIR',
             'find . -name "*" -type f -exec curl -H "Authorization: Bearer $SD_TOKEN" ' +
             '-H "Content-Type: text/plain" -X ' +
-            `PUT ${this.storeUrl}/$SD_BUILD_ID/${ARTIFACTS_DIR_SUFFIX}/{} -T {} \\;`
+            `PUT ${this.storeUrl}/v1/builds/$SD_BUILD_ID/${ARTIFACTS_DIR_SUFFIX}/{} -T {} \\;`
         ];
     }
 
