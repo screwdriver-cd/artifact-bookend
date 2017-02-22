@@ -1,1 +1,1 @@
-cd $SD_ARTIFACTS_DIR && find . -name "*" -type f -exec curl -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: text/plain" -X PUT https://store.screwdriver.cd/$SD_BUILD_ID/ARTIFACTS/{} -T {} \;
+cd $SD_ARTIFACTS_DIR && find . -name "*" -type f -exec curl -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: text/plain" -X PUT https://store.screwdriver.cd/v1/builds/$SD_BUILD_ID/ARTIFACTS/{} -T {} \;
