@@ -11,7 +11,7 @@ npm install screwdriver-artifact-bookend
 
 ## Functionality
 
-Store all the artifacts saved in the Artifacts Directory to the build folder in the Store, to make sure they're not all erased when the build is complete. This bookend currently acts only as a teardown plugin. All artifacts files/folders are written to Store on teardown.
+Store all the artifacts saved in the Artifacts Directory to the build folder in the Store, so we can make sure they're not all erased when the build is complete. This bookend currently acts only as a teardown plugin. All artifacts files/folders are written to Store on teardown.
 
 This is a default plugin that is set in the default.yaml (https://github.com/screwdriver-cd/screwdriver/blob/master/config/default.yaml) under the bookends section.
 
