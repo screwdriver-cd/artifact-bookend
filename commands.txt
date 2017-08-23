@@ -1,0 +1,3 @@
+cd $SD_ARTIFACTS_DIR
+find . -print > manifest.txt
+find . -type f -exec sh -c 'f=${1/#\.\/}; curl -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: text/plain" -X PUT $STORE_URL/v1/builds/$SD_BUILD_ID/$ARTIFACTS_DIR_SUFFIX/$f -T ./$f' -- {} \;

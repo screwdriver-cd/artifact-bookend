@@ -1,1 +1,1 @@
-cd $SD_ARTIFACTS_DIR && find . -print > manifest.txt && find . -name "*" -type f -exec curl -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: text/plain" -X PUT https://store.screwdriver.cd/v1/builds/$SD_BUILD_ID/ARTIFACTS/{} -T {} \;
+cd $SD_ARTIFACTS_DIR && find . -print > manifest.txt && find . -type f -exec sh -c 'f=${1/#\.\/}; curl -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: text/plain" -X PUT https://store.screwdriver.cd/v1/builds/$SD_BUILD_ID/ARTIFACTS/$f -T ./$f' -- {} \;
