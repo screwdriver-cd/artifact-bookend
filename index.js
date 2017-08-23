@@ -1,7 +1,11 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const { BookendInterface } = require('screwdriver-build-bookend');
+
 const ARTIFACTS_DIR_SUFFIX = 'ARTIFACTS';
+const COMMANDS = fs.readFileSync(path.join(__dirname, 'commands.txt'), 'utf8').trim();
 
 class ArtifactBookend extends BookendInterface {
     /**
@@ -13,13 +17,10 @@ class ArtifactBookend extends BookendInterface {
     constructor(storeUrl) {
         super();
         this.storeUrl = storeUrl;
-        this.teardownCommands = [
-            'cd $SD_ARTIFACTS_DIR',
-            'find . -print > manifest.txt',
-            'find . -name "*" -type f -exec curl -H "Authorization: Bearer $SD_TOKEN" ' +
-            '-H "Content-Type: text/plain" -X ' +
-            `PUT ${this.storeUrl}/v1/builds/$SD_BUILD_ID/${ARTIFACTS_DIR_SUFFIX}/{} -T {} \\;`
-        ];
+        this.teardownCommands = COMMANDS
+             .replace('$ARTIFACTS_DIR_SUFFIX', ARTIFACTS_DIR_SUFFIX)
+             .replace('$STORE_URL', storeUrl)
+             .split('\n');
     }
 
     /**
