@@ -1,1 +1,1 @@
-cd $SD_ARTIFACTS_DIR && find . -print > manifest.txt && find . -type f -exec sh -c 'f=`echo $1 | sed "s/^\.\///"`; curl -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: text/plain" -X PUT https://store.screwdriver.cd/v1/builds/$SD_BUILD_ID/ARTIFACTS/$f -T ./$f' -- {} \;
+cd $SD_ARTIFACTS_DIR && find . -type f -print > manifest.txt && find . -type f -exec sh -c 'f=`echo $1 | sed "s/^\.\///"`; curl -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: text/plain" -X PUT https://store.screwdriver.cd/v1/builds/$SD_BUILD_ID/ARTIFACTS/$f -T ./$f' -- {} \;
