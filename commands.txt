@@ -1,3 +1,4 @@
+export SD_CURL_CMD_WRAPPER=$(echo 'sd-step exec --pkg-version "7.54.1" core/curl')
 cd $SD_ARTIFACTS_DIR
 find . -type f -print > manifest.txt
-find . -type f -exec sh -c 'f=`echo $1 | sed "s/^\.\///"`; encoded=$(sd-step exec --pkg-version "7.54.1" core/curl "curl -s -w \"%{url_effective}\" --data-urlencode $f -G \"\" | sed -e \"s/^\/?//\""); $(sd-step exec --pkg-version "7.54.1" core/curl "curl -H \"Authorization: Bearer $SD_TOKEN\" -H \"Content-Type: text/plain\" -X PUT $STORE_URL/v1/builds/$SD_BUILD_ID/$ARTIFACTS_DIR_SUFFIX/$encoded -T ./$f")' -- {} \;
+find . -type f -exec sh -c 'f=`echo $1 | sed "s/^\.\///"`; encoded=$($SD_CURL_CMD_WRAPPER "curl -s -w \"%{url_effective}\" --data-urlencode $f -G \"\" | sed -e \"s/^\/?//\""); $SD_CURL_CMD_WRAPPER "curl -H \"Authorization: Bearer $SD_TOKEN\" -H \"Content-Type: text/plain\" -X PUT $STORE_URL/v1/builds/$SD_BUILD_ID/$ARTIFACTS_DIR_SUFFIX/$encoded -T ./$f"' -- {} \;
