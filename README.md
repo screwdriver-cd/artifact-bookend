@@ -13,6 +13,8 @@ npm install screwdriver-artifact-bookend
 
 Store all the artifacts saved in the Artifacts Directory to the build folder in the Store, so we can make sure they're not all erased when the build is complete. This bookend currently acts only as a teardown plugin. All artifacts files/folders are written to Store on teardown.
 
+If `$SD_ZIP_ARTIFACTS` is set to `true`, it compresses all artifacts under `$SD_ARTIFACTS_DIR` into a zip file and uploads the zip file to the store.
+
 This is a default plugin that is set in the default.yaml (https://github.com/screwdriver-cd/screwdriver/blob/master/config/default.yaml) under the bookends section.
 
 For example, if `$SD_ARTIFACTS_DIR` is set as `/sd/workspace/artifacts` and the user creates within that directory:
@@ -40,6 +42,8 @@ https://{store-uri}/logs.screwdriver.cd/builds/<BUILD_ID>-ARTIFACTS
 ----fourth_file.txt
 --fifth_file.txt
 ```
+
+## Uploading
 
 ## Testing
 
