@@ -18,9 +18,9 @@ class ArtifactBookend extends BookendInterface {
         super();
         this.storeUrl = storeUrl;
         this.teardownCommands = COMMANDS
-             .replace(new RegExp('\\$ARTIFACTS_DIR_SUFFIX', 'g'), ARTIFACTS_DIR_SUFFIX)
-             .replace(new RegExp('\\$STORE_URL', 'g'), storeUrl)
-             .split('\n');
+            .replace(new RegExp('\\$ARTIFACTS_DIR_SUFFIX', 'g'), ARTIFACTS_DIR_SUFFIX)
+            .replace(new RegExp('\\$STORE_URL', 'g'), storeUrl)
+            .split('\n');
     }
 
     /**
