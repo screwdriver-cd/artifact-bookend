@@ -1,4 +1,4 @@
-if [ `uname` = 'Darwin' ]; then export SD_ZIP_CMD_WRAPPER=""; else export SD_ZIP_CMD_WRAPPER="$(echo 'sd-step exec core/zip')"; fi
+if [ `uname` = 'Darwin' ]; then export SD_ZIP_CMD_WRAPPER="eval"; else export SD_ZIP_CMD_WRAPPER="$(echo 'sd-step exec core/zip')"; fi
 cd $SD_ARTIFACTS_DIR
 find . -type f -print > manifest.txt
-if [ "$SD_ZIP_ARTIFACTS" = "true" ]; then ZIPFILE=SD_ARTIFACT.zip && find . -type f -exec $SD_ZIP_CMD_WRAPPER zip $ZIPFILE {} + && store-cli set $ZIPFILE --type=artifact; else find . -type f -exec store-cli set $1 --type=artifact -- {} \;; fi;
+if [ "$SD_ZIP_ARTIFACTS" = "true" ]; then ZIPFILE=SD_ARTIFACT.zip && $SD_ZIP_CMD_WRAPPER "zip -r -D $ZIPFILE ./" && store-cli set $ZIPFILE --type=artifact; else find . -type f -exec store-cli set $1 --type=artifact -- {} \;; fi;
