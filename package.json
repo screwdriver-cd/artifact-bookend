@@ -42,6 +42,9 @@
     "screwdriver-build-bookend": "^2.3.3"
   },
   "release": {
+    "branches": [
+      "master"
+    ],
     "debug": false
   }
 }
