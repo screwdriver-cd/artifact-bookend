@@ -1,12 +1,11 @@
 /* Inline JSHint configuration for Mocha globals. */
-/* global describe, it, beforeEach */ // All Mocha globals.
 
 'use strict';
 
-const assert = require('chai').assert;
-const ArtifactBookend = require('..');
+const { assert } = require('chai');
 const fs = require('fs');
 const path = require('path');
+const ArtifactBookend = require('..');
 
 describe('index test', () => {
     let bookend;
@@ -25,14 +24,11 @@ describe('index test', () => {
         const commandsPath = path.resolve(__dirname, './data/commands.txt');
         const commands = fs.readFileSync(commandsPath, 'utf8').replace('\n', '');
 
-        return bookend.getTeardownCommand().then(result =>
-            assert.deepEqual(result, commands)
-        );
+        return bookend.getTeardownCommand().then(result => assert.deepEqual(result, commands));
     });
 
     it('getSetupCommand', () =>
-        bookend.getSetupCommand().then((result) => {
+        bookend.getSetupCommand().then(result => {
             assert.strictEqual(result, '');
-        })
-    );
+        }));
 });
