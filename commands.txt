@@ -1,4 +1,6 @@
-if [[ `uname` = 'Darwin' || ${SD_HAB_ENABLED:-false} = 'false' ]]; then export SD_ZIP_CMD_WRAPPER="eval"; export SD_CURL_CMD_WRAPPER="eval"; else export SD_ZIP_CMD_WRAPPER="$(echo 'sd-step exec core/zip')" export SD_CURL_CMD_WRAPPER="$(echo 'sd-step exec core/curl')"; fi
+if [[ `uname` = 'Darwin' || ${SD_HAB_ENABLED:-false} = 'false' ]]; then export SD_ZIP_CMD_WRAPPER="eval"
+export SD_CURL_CMD_WRAPPER="eval"; else export SD_ZIP_CMD_WRAPPER="$(echo 'sd-step exec core/zip')"
+export SD_CURL_CMD_WRAPPER="$(echo 'sd-step exec core/curl')"; fi
 cd $SD_ARTIFACTS_DIR
 find . -type f -print > manifest.txt
 if [ "$SD_ZIP_ARTIFACTS" = "true" ]; then ZIPFILE=SD_ARTIFACT.zip && $SD_ZIP_CMD_WRAPPER "zip -r -D $ZIPFILE ./" && store-cli set $ZIPFILE --type=artifact && $SD_CURL_CMD_WRAPPER "curl -X POST -H \"Authorization: Bearer ${SD_TOKEN}\" \"${SD_BUILD_URL}/artifacts/unzip\""; else find . -type f -exec store-cli set $1 --type=artifact -- {} \;; fi;

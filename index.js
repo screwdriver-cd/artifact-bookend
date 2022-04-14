@@ -17,9 +17,11 @@ class ArtifactBookend extends BookendInterface {
     constructor(storeUrl) {
         super();
         this.storeUrl = storeUrl;
+        /* eslint-disable max-len */
         this.teardownCommands = COMMANDS.replace(new RegExp('\\$ARTIFACTS_DIR_SUFFIX', 'g'), ARTIFACTS_DIR_SUFFIX)
             .replace(new RegExp('\\$STORE_URL', 'g'), storeUrl)
             .split('\n');
+        /* eslint-enable max-len */
     }
 
     /**
