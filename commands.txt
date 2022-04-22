@@ -1,4 +1,4 @@
-if [[ `uname` = 'Darwin' || ${SD_HAB_ENABLED:-false} = 'false' ]]; then export SD_ZIP_CMD_WRAPPER="eval"
+if [ `uname` = 'Darwin' ] || [ ${SD_HAB_ENABLED:-false} = 'false' ]; then export SD_ZIP_CMD_WRAPPER="eval"
 export SD_CURL_CMD_WRAPPER="eval"; else export SD_ZIP_CMD_WRAPPER="$(echo 'sd-step exec core/zip')"
 export SD_CURL_CMD_WRAPPER="$(echo 'sd-step exec core/curl')"; fi
 cd $SD_ARTIFACTS_DIR
