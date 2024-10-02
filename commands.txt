@@ -1,4 +1,4 @@
-{ sd-cmd exec sd/events@latest dns || echo "Something wrong while sending events" ; }
+if command -v sd-cmd >/dev/null 2>&1; then { sd-cmd exec sd/events@latest dns || echo "Something wrong while sending events" ; } else echo "no op"; fi
 if [ `uname` = 'Darwin' ] || [ ${SD_HAB_ENABLED:-false} = 'false' ]; then export SD_ZIP_CMD_WRAPPER="eval"
 export SD_CURL_CMD_WRAPPER="eval"; else export SD_ZIP_CMD_WRAPPER="$(echo 'sd-step exec core/zip')"
 export SD_CURL_CMD_WRAPPER="$(echo 'sd-step exec core/curl')"; fi
